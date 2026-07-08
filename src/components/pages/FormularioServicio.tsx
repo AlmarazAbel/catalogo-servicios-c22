@@ -4,6 +4,7 @@ import type { ServicioFormData } from "../../interfaces/servicios";
 import { useAppContext } from "../../context/AppContext";
 import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
+import { crearServicioApi } from "../../helpers/queries";
 
 interface FormularioProps {
   titulo: string;
@@ -18,7 +19,7 @@ const FormularioServicio = ({ titulo }: FormularioProps) => {
     setValue,
   } = useForm<ServicioFormData>();
 // traigo los datos que necesito del contexto
-  const { crearServicio, buscarServicio, editarServicio } = useAppContext();
+  const {  buscarServicio, editarServicio } = useAppContext();
   const { id } = useParams<{ id: string }>();
   const navegacion = useNavigate();
 
@@ -37,8 +38,9 @@ const FormularioServicio = ({ titulo }: FormularioProps) => {
 
   const onSubmit: SubmitHandler<ServicioFormData> = (data, e) => {
     console.log(data);
-    if (titulo.includes("Crear") && crearServicio) {
-      crearServicio(data);
+    if (titulo.includes("Crear") && crearServicioApi) {
+      crearServicioApi(data)
+      
       Swal.fire({
         title: "Servicio creado",
         text: `El servicio '${data.nombreServicio}' fue creado correctamente`,
