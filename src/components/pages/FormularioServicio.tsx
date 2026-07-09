@@ -4,7 +4,7 @@ import type { ServicioFormData } from "../../interfaces/servicios";
 import { useAppContext } from "../../context/AppContext";
 import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
-import { crearServicioApi } from "../../helpers/queries";
+import  { crearServicioApi } from "../../helpers/queries";
 
 interface FormularioProps {
   titulo: string;

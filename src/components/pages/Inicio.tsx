@@ -1,11 +1,11 @@
 
 import CardServicio from "../services/CardServicio";
-//import { useAppContext } from "../../context/AppContext";
+
 import type { Servicio } from "../../interfaces/servicios";
 import {useEffect, useState } from "react";
 import { listarServiciosApi } from "../../helpers/queries";
 const Inicio = () => {
- // const { servicios } = useAppContext();
+
  
  const [servicios, setServicios] = useState<Servicio[]>([])
 

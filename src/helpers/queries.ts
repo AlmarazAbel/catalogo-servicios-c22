@@ -49,3 +49,19 @@ export const borrarServicioApi = async (id:string): Promise<Response> => {
     throw error;
   }
 };
+
+export const crearServicioApi = async (servicio:Servicio): Promise<Response> => {
+  try {
+    const respuesta = await fetch(urlServicios,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(servicio)
+    });
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

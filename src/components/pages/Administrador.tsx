@@ -5,6 +5,7 @@ import { LuCirclePlus } from "react-icons/lu";
 import type { Servicio } from "../../interfaces/servicios";
 import { useEffect,useState } from "react";
 import { listarServiciosApi } from "../../helpers/queries";
+
 const Administrador = () => {
  const [servicios, setServicios] = useState<Servicio[]>([])
 useEffect(()=>{
@@ -16,7 +17,7 @@ const respuestaServicios = await listarServiciosApi()
 if(respuestaServicios && respuestaServicios.status=== 200)
 {
   const datos= await respuestaServicios.json()
-  console.log(datos)
+ 
   setServicios(datos)
 }
  }
