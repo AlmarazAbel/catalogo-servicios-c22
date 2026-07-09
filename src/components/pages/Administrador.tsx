@@ -65,6 +65,7 @@ if(respuestaServicios && respuestaServicios.status=== 200)
                   key={servicio._id}
                   servicio={servicio}
                   fila={indice + 1}
+                  setServicios ={setServicios}
                 />
               ))
             ) : (
