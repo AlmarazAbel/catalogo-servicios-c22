@@ -50,7 +50,7 @@ export const borrarServicioApi = async (id:string): Promise<Response> => {
   }
 };
 
-export const crearServicioApi = async (servicio:Servicio): Promise<Response> => {
+export const crearServicioApi = async (servicio: Servicio): Promise<Response> => {
   try {
     const respuesta = await fetch(urlServicios,{
         method: 'POST',
