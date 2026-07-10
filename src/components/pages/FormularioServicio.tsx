@@ -42,7 +42,7 @@ const FormularioServicio = ({ titulo }: FormularioProps) => {
     }
   };
   const onSubmit: SubmitHandler<ServicioFormData> = async (data, e) => {
-    console.log(data);
+    
     if (titulo.includes("Crear") && crearServicioApi) {
       const respuesta = await crearServicioApi(data);
       if (respuesta && respuesta.status === 201) {

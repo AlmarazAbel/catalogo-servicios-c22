@@ -18,7 +18,7 @@ const respuestaServicios = await listarServiciosApi()
 if(respuestaServicios && respuestaServicios.status=== 200)
 {
   const datos= await respuestaServicios.json()
-  console.log(datos)
+  
   setServicios(datos)
 }
  }
