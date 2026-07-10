@@ -10,7 +10,7 @@ import FormularioServicio from "./components/pages/FormularioServicio";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import { useEffect, useState } from "react";
 import { AppContext } from "./context/AppContext";
-import type { Servicio, ServicioFormData } from "./interfaces/servicios";
+
 
 function App() {
   const usuarioSessionStorage = JSON.parse(
@@ -19,63 +19,20 @@ function App() {
   const [usuarioLogueado, setUsuarioLogueado] = useState<boolean>(
     usuarioSessionStorage,
   );
-  // agregamos los servicios
-  const serviciosLocalStorage = JSON.parse(
-    localStorage.getItem("serviciosKey") || "[]",
-  );
-  const [servicios, setServicios] = useState<Servicio[]>(serviciosLocalStorage);
+  
 
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
 
-  useEffect(() => {
-    localStorage.setItem("serviciosKey", JSON.stringify(servicios));
-  }, [servicios]);
-
-  // logicar para trabajar con los sercicios
-  const crearServicio = (dataServicio: ServicioFormData) => {
-    const servicioNuevo: Servicio = {
-      ...dataServicio,
-      _id: crypto.randomUUID(),
-    };
-    setServicios([...servicios, servicioNuevo]);
-  };
-
-  const borrarServicio = (idServicio: string) => {
-    const serviciosFiltrados = servicios.filter(
-      (itemServicio) => itemServicio._id !== idServicio,
-    );
-    setServicios(serviciosFiltrados);
-  };
-
-  const editarServicio = (
-    idServicio: string,
-    servicioEditar: ServicioFormData,
-  ) => {
-    const serviciosEditados = servicios.map((itemServicio) => {
-      if (itemServicio._id === idServicio) {
-        return { ...itemServicio, ...servicioEditar };
-      }
-      return itemServicio;
-    });
-    setServicios(serviciosEditados);
-  };
-
-  const buscarServicio = (idServicio: string): Servicio | undefined => {
-    return servicios.find((item) => item._id === idServicio);
-  };
+  
 
   return (
     <AppContext.Provider
       value={{
         usuarioLogueado,
-        setUsuarioLogueado,
-        servicios,
-        crearServicio,
-        borrarServicio,
-        editarServicio,
-        buscarServicio,
+        setUsuarioLogueado
+        
       }}
     >
       <BrowserRouter>

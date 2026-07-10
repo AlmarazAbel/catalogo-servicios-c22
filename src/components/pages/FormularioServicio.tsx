@@ -69,7 +69,7 @@ const FormularioServicio = ({ titulo }: FormularioProps) => {
       }
       // presguntar si el status es 400
     } else if (id) {
-      const respuesta = await editarServicioApi(id, data);
+      const respuesta = await editarServicioApi(id ,data);
       if(respuesta && respuesta.status===200){
 Swal.fire({
         title: "Servicio editado",
