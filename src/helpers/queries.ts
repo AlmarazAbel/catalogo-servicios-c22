@@ -1,5 +1,5 @@
 
-import type { Servicio, ServicioFormData } from "../interfaces/servicios";
+import type { ServicioFormData } from "../interfaces/servicios";
 
 const urlServicios = import.meta.env.VITE_SERVICIO;
 
@@ -13,21 +13,26 @@ export const listarServiciosApi = async (): Promise<Response> => {
   }
 };
 
-export const editarServicioApi = async (id:string,servicio:Servicio): Promise<Response> => {
+export const editarServicioApi = async (
+  id: string,
+  servicio: ServicioFormData
+): Promise<Response> => {
   try {
-    const respuesta = await fetch(`${urlServicios}/${id}`,{
-        method: 'PUT',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify(servicio)
+    const respuesta = await fetch(`${urlServicios}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(servicio),
     });
+
     return respuesta;
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
+
 export const buscarServicioApi = async (id:string): Promise<Response> => {
   try {
     const respuesta = await fetch(`${urlServicios}/${id}`)
