@@ -1,22 +1,4 @@
 import { useParams, useNavigate, Link } from "react-router";
-<<<<<<< HEAD
-import { useAppContext } from "../../context/AppContext";
-import { useEffect } from "react";
-import { formatearPrecio } from "../../utils/formateador";
-const DetalleServicio = () => {
-  const { id } = useParams<{ id: string }>();
-  const { buscarServicio } = useAppContext();
-  const navigate = useNavigate();
-
-  const servicio = buscarServicio(id || "");
-
-  useEffect(() => {
-    if (!servicio) {
-      // Si no existe el servicio, redirigir a 404
-      navigate("/404", { replace: true });
-    }
-  }, [servicio, navigate]);
-=======
 
 import { useEffect, useState } from "react";
 import { buscarServicioApi } from "../../helpers/queries";
@@ -46,7 +28,6 @@ const DetalleServicio = () => {
       navigate("/404", { replace: true });
     }
   };
->>>>>>> dev
 
   if (!servicio) {
     return null;
@@ -55,25 +36,6 @@ const DetalleServicio = () => {
   return (
     <div className="max-w-xl mx-auto bg-zinc-900 rounded-lg shadow-lg p-8 mt-8">
       <h2 className="text-3xl font-bold mb-4 text-center">
-<<<<<<< HEAD
-        {servicio.nombreServicio}
-      </h2>
-      <img
-        src={servicio.imagen}
-        alt={servicio.nombreServicio}
-        className="w-full h-64 object-cover rounded mb-4 border border-zinc-700"
-      />
-      <p className="text-lg mb-2">
-        <span className="font-semibold">Precio: </span>
-        {formatearPrecio(servicio.precio)}
-      </p>
-      <p className="text-lg mb-2">
-        <span className="font-semibold">Categoría:</span> {servicio.categoria}
-      </p>
-      <p className="mb-4">
-        <span className="font-semibold">Descripción:</span>{" "}
-        {servicio.descripcion}
-=======
          {servicio.nombreServicio}
       </h2>
       <img
@@ -90,7 +52,6 @@ const DetalleServicio = () => {
       </p>
       <p className="mb-4">
         <span className="font-semibold">Descripción:</span>  {servicio.descripcion}
->>>>>>> dev
       </p>
       <Link
         to="/"
