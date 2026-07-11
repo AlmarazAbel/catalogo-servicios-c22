@@ -30,8 +30,8 @@ mira la demo del proyecto [aqui](https://catalogo-servicios-c22.netlify.app/)
    - Crea un archivo llamado `.env` en la raíz del proyecto.
    - Agrega las siguientes líneas (ajusta el valor según corresponda):
      ```bash
-     VITE_EMAIL=email-admin
-     VITE_PASSWORD=password-admin
+     VITE_EMAIL=admin@gmail.com
+     VITE_PASSWORD=Admin12345$
      ```
 4. **Iniciar el proyecto:**
    ```bash

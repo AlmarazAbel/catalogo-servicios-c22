@@ -1,16 +1,18 @@
 import { Link } from "react-router";
 import type { Servicio } from "../../interfaces/servicios";
-import { useAppContext } from "../../context/AppContext";
+
 import Swal from "sweetalert2";
 import { LuTrash2,LuPencil  } from "react-icons/lu";
+import { borrarServicioApi } from "../../helpers/queries";
 
 interface ItemTablaProps {
   servicio: Servicio;
   fila: number;
+  setServicios: React.Dispatch<React.SetStateAction<Servicio[]>>
 }
 
-const ItemTabla = ({servicio, fila}: ItemTablaProps) => {
-   const { borrarServicio } = useAppContext();
+const ItemTabla = ({servicio, fila, setServicios}: ItemTablaProps) => {
+ 
 
   const eliminarServicio = () => {
     Swal.fire({
@@ -24,10 +26,11 @@ const ItemTabla = ({servicio, fila}: ItemTablaProps) => {
       cancelButtonColor: "#ef4444", // red-500
       confirmButtonText: "Sí, borrar",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
+    }).then(async(result) =>{
       if (result.isConfirmed) {
-        borrarServicio(servicio.id);
-        Swal.fire({
+        const respuesta= await borrarServicioApi(servicio._id);
+        if(respuesta && respuesta.status===200){
+          Swal.fire({
           title: "Eliminado",
           text: `El servicio fue eliminado correctamente`,
           icon: "success",
@@ -35,6 +38,18 @@ const ItemTabla = ({servicio, fila}: ItemTablaProps) => {
           color: "#f4f4f5",
           confirmButtonColor: "#3b82f6",
         });
+        setServicios((prevServicios)=>prevServicios.filter((item)=>item._id!==servicio._id))
+        }else{
+          Swal.fire({
+          title: "Ocurrio un error",
+          text: `El servicio no pudo ser eliminado correctamente,intentelo en unos minutos`,
+          icon: "error",
+          background: "#18181b",
+          color: "#f4f4f5",
+          confirmButtonColor: "#3b82f6",
+        });
+        }
+        
       }
     });
   };
@@ -55,7 +70,7 @@ const ItemTabla = ({servicio, fila}: ItemTablaProps) => {
         <div className="flex gap-3">
           <Link 
             className="text-amber-500 hover:text-amber-400 transition-colors flex items-center gap-1" 
-            to={`/administrador/editar/${servicio.id}`}
+            to={`/administrador/editar/${servicio._id}`}
           >
             <LuPencil />  Editar
           </Link>

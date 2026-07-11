@@ -1,4 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router";
+<<<<<<< HEAD
 import { useAppContext } from "../../context/AppContext";
 import { useEffect } from "react";
 import { formatearPrecio } from "../../utils/formateador";
@@ -15,6 +16,37 @@ const DetalleServicio = () => {
       navigate("/404", { replace: true });
     }
   }, [servicio, navigate]);
+=======
+
+import { useEffect, useState } from "react";
+import { buscarServicioApi } from "../../helpers/queries";
+import type { Servicio } from "../../interfaces/servicios";
+import { formatearPrecio } from "../../utils/formateador";
+
+const DetalleServicio = () => {
+  const { id } = useParams<{ id: string }>();
+  const [servicio, setServicio] = useState<Servicio | null>(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    obtenerServicio();
+  }, []);
+
+  const obtenerServicio = async () => {
+    if(!id){
+        return
+    }
+    const respuesta = await buscarServicioApi(id);
+
+    if (respuesta && respuesta.status === 200) {
+      const data = await respuesta.json();
+      setServicio(data);
+    } else {
+      navigate("/404", { replace: true });
+    }
+  };
+>>>>>>> dev
 
   if (!servicio) {
     return null;
@@ -23,6 +55,7 @@ const DetalleServicio = () => {
   return (
     <div className="max-w-xl mx-auto bg-zinc-900 rounded-lg shadow-lg p-8 mt-8">
       <h2 className="text-3xl font-bold mb-4 text-center">
+<<<<<<< HEAD
         {servicio.nombreServicio}
       </h2>
       <img
@@ -40,6 +73,24 @@ const DetalleServicio = () => {
       <p className="mb-4">
         <span className="font-semibold">Descripción:</span>{" "}
         {servicio.descripcion}
+=======
+         {servicio.nombreServicio}
+      </h2>
+      <img
+        src="https://images.pexels.com/photos/6980355/pexels-photo-6980355.jpeg"
+        alt="ejemplo"
+        className="w-full h-64 object-cover rounded mb-4 border border-zinc-700"
+      />
+      <p className="text-lg mb-2">
+        <span className="font-semibold">Precio:</span> 
+        {formatearPrecio(servicio.precio)}
+      </p>
+      <p className="text-lg mb-2">
+        <span className="font-semibold">Categoría:</span>  {servicio.categoria}
+      </p>
+      <p className="mb-4">
+        <span className="font-semibold">Descripción:</span>  {servicio.descripcion}
+>>>>>>> dev
       </p>
       <Link
         to="/"

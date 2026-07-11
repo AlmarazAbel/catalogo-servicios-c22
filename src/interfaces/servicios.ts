@@ -1,5 +1,5 @@
 export interface Servicio {
-  id: string;
+  _id: string;
   nombreServicio: string;
   precio: number;
   imagen: string;
@@ -7,4 +7,4 @@ export interface Servicio {
   descripcion: string;
 }
 
-export type ServicioFormData = Omit<Servicio, 'id'>;
+export type ServicioFormData = Omit<Servicio, '_id'>;
